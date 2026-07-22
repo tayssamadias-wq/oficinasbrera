@@ -203,6 +203,14 @@
       flex-shrink: 0;
     }
 
+    .vagas-tag {
+  color: #c84b4b; /* Vermelho escuro elegante */
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+  letter-spacing: 0.03em;
+}
+
     /* Cards Informativos (Detalhes e Petit Comité) */
     .info-box {
       background: var(--card-bg);
@@ -400,6 +408,7 @@
             <div class="option-info-wrapper">
               <div class="option-title">Aquarela em Molduras</div>
               <div style="font-size: 0.85rem; color: var(--text-muted);">Data: 01/08 • 15h</div>
+              <div class="vagas-tag">Restam 13 vagas</div>
             </div>
             <span class="option-badge">Selecione</span>
           </label>
@@ -410,6 +419,7 @@
             <div class="option-info-wrapper">
               <div class="option-title">Bordado de Toalhas</div>
               <div style="font-size: 0.85rem; color: var(--text-muted);">Data: 12/08 • 15h</div>
+              <div class="vagas-tag">Restam 16 vagas</div>
             </div>
             <span class="option-badge">Selecione</span>
           </label>
@@ -420,6 +430,7 @@
             <div class="option-info-wrapper">
               <div class="option-title">Pintura em Porcelana</div>
               <div style="font-size: 0.85rem; color: var(--text-muted);">Data: 15/08 • 15h</div>
+              <div class="vagas-tag">Restam 15 vagas</div>
             </div>
             <span class="option-badge">Selecione</span>
           </label>
@@ -560,6 +571,7 @@
     const oficinasData = {
       aquarela: {
         nome: 'Aquarela em Molduras',
+        vagas: 'Restam 13 vagas',
         tipo: 'Aquarela',
         data: '01/08',
         horario: '15:00',
@@ -578,6 +590,7 @@
       },
       bordado: {
         nome: 'Bordado de Toalhas',
+        vagas: 'Restam 16 vagas',
         tipo: 'Bordado',
         data: '12/08',
         horario: '15:00',
@@ -593,6 +606,7 @@
       },
       porcelana: {
         nome: 'Pintura em Porcelana',
+        vagas: 'Restam 15 vagas',
         tipo: 'Pintura em Porcelana',
         data: '15/08',
         horario: '15:00',
@@ -641,6 +655,7 @@
 
       detailsBox.innerHTML = `
         <h3>${data.nome}</h3>
+        <div style="color: #c84b4b; font-size: 0.85rem; font-weight: 600; margin-top: -0.4rem; margin-bottom: 0.9rem;">${data.vagas}</div>
         <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
         <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
         <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
