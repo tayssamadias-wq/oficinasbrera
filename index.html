@@ -3,26 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário Exclusivo</title>
+  <title>Inscrição Oficina | Brera Group</title>
+  
+  <!-- Fontes Elegantes Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --bg-color: #0f1016;
-      --card-bg: #181a24;
-      --accent-color: #d4af37; /* Tom dourado refinado */
-      --text-color: #f3f4f6;
-      --text-muted: #9ca3af;
+      --bg-brera: #1e2c17; /* Verde oficial do Brera */
+      --text-white: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.75);
+      --card-bg: rgba(255, 255, 255, 0.07);
+      --card-border: rgba(255, 255, 255, 0.18);
+      --accent-light: #e2d3b2;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background-color: var(--bg-brera);
+      color: var(--text-white);
+      font-family: 'Plus Jakarta Sans', sans-serif;
       min-height: 100vh;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    /* Topo com a Logo Brera */
+    .header-logo {
+      text-align: center;
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .brand-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      opacity: 0.9;
+      margin-top: -4px;
     }
 
     /* Barra de Progresso */
@@ -31,29 +70,31 @@
       top: 0;
       left: 0;
       width: 100%;
-      height: 4px;
-      background: rgba(255,255,255,0.05);
-    }
-    .progress-bar {
-      height: 100%;
-      width: 33%;
-      background: var(--accent-color);
-      transition: width 0.4s ease;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 100;
     }
 
-    /* Container das Etapas */
+    .progress-bar {
+      height: 100%;
+      width: 20%;
+      background: #ffffff;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Container Principal */
     .form-container {
       width: 100%;
-      max-width: 540px;
-      padding: 2rem;
-      position: relative;
+      max-width: 580px;
+      margin: 0 auto;
+      padding-bottom: 3rem;
     }
 
     .step {
       display: none;
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.4s ease;
+      transform: translateY(16px);
+      transition: all 0.4s ease-in-out;
     }
 
     .step.active {
@@ -62,60 +103,239 @@
       transform: translateY(0);
     }
 
-    label {
-      font-size: 1.5rem;
-      font-weight: 300;
-      display: block;
+    .step-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 500;
+      line-height: 1.3;
       margin-bottom: 1.5rem;
-      line-height: 1.4;
+      color: #ffffff;
     }
 
-    input, textarea {
+    /* Inputs de Texto */
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    input[type="text"], input[type="tel"] {
       width: 100%;
       background: transparent;
       border: none;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
-      color: var(--text-color);
-      font-size: 1.25rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+      font-size: 1.15rem;
       padding: 0.8rem 0;
       outline: none;
       transition: border-color 0.3s;
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--accent-color);
+    input[type="text"]::placeholder, input[type="tel"]::placeholder {
+      color: rgba(255, 255, 255, 0.4);
     }
 
-    .buttons {
-      margin-top: 2.5rem;
+    input[type="text"]:focus, input[type="tel"]:focus {
+      border-color: #ffffff;
+    }
+
+    /* Cards de Opções Selecionáveis */
+    .options-grid {
       display: flex;
-      gap: 1rem;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-bottom: 1.5rem;
     }
 
-    button {
-      background: var(--accent-color);
-      color: #000;
+    .option-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .option-card:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .option-card input[type="radio"] {
+      display: none;
+    }
+
+    .option-card.selected {
+      background: rgba(255, 255, 255, 0.2);
+      border-color: #ffffff;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .option-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .option-badge {
+      font-size: 0.85rem;
+      padding: 0.2rem 0.6rem;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      color: #ffffff;
+    }
+
+    /* Cards Informativos (Detalhes e Petit Comité) */
+    .info-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .info-box h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.8rem;
+      color: #ffffff;
+    }
+
+    .info-detail {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+
+    .info-detail strong {
+      color: #ffffff;
+    }
+
+    .includes-list {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .includes-list h4 {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: var(--accent-light);
+    }
+
+    .includes-list ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .includes-list li {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+      position: relative;
+      padding-left: 1.2rem;
+    }
+
+    .includes-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #ffffff;
+    }
+
+    /* Botões Brancos Principais */
+    .btn-group {
+      display: flex;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+
+    .btn-white {
+      background-color: #ffffff;
+      color: var(--bg-brera);
       border: none;
-      padding: 0.8rem 2rem;
+      padding: 0.95rem 2rem;
       border-radius: 30px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.3s;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex: 1;
     }
 
-    button:hover { opacity: 0.9; }
+    .btn-white:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+      transform: translateY(-1px);
+    }
 
-    button.prev-btn {
+    .btn-outline {
       background: transparent;
       color: var(--text-muted);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 0.95rem 1.5rem;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 0.5;
     }
 
-    .success-message {
+    .btn-outline:hover {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
+    /* Área do Pix */
+    .pix-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(255, 255, 255, 0.3);
+      padding: 1.2rem;
+      border-radius: 12px;
       text-align: center;
-      display: none;
-      font-size: 1.4rem;
+      margin: 1rem 0;
+    }
+
+    .pix-key {
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: var(--accent-light);
+      margin: 0.5rem 0;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    .copy-btn:hover { background: rgba(255, 255, 255, 0.3); }
+
+    .whatsapp-btn {
+      background-color: #25d366;
+      color: #ffffff;
+      border: none;
+      padding: 0.95rem 2rem;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      margin-top: 1rem;
     }
   </style>
 </head>
@@ -125,90 +345,436 @@
     <div class="progress-bar" id="progressBar"></div>
   </div>
 
+  <!-- Header da Marca -->
+  <div class="header-logo">
+    <div class="brand-title">Brera</div>
+    <div class="brand-subtitle">GROUP</div>
+  </div>
+
   <div class="form-container">
-    <form id="typeform" action="https://api.web3forms.com/submit" method="POST">
+    <form id="breraForm" action="https://api.web3forms.com/submit" method="POST">
       
-      <!-- Substitua com a sua chave gratuita do web3forms.com -->
+      <!-- Chave do Web3Forms -->
       <input type="hidden" name="access_key" value="3c32712d-7f7b-4112-affe-d3a22f37db79">
+      <input type="hidden" name="subject" value="Nova Inscrição Oficina Brera Group">
 
-      <!-- Etapa 1 -->
-      <div class="step active" data-step="1">
-        <label>1. Como você gostaria de ser chamada(o)?</label>
-        <input type="text" name="nome" placeholder="Digite seu nome..." required>
-        <div class="buttons">
-          <button type="button" onclick="nextStep()">Avançar →</button>
+      <!-- ETAPA 1: Nome Completo + Contato -->
+      <div class="step active" id="step-1">
+        <label class="step-label">1. Para começarmos, qual o seu nome completo e WhatsApp?</label>
+        <div class="input-group">
+          <input type="text" id="nome" name="Nome Completo" placeholder="Digite seu nome completo..." required>
+        </div>
+        <div class="input-group">
+          <input type="tel" id="whatsapp" name="WhatsApp" placeholder="Seu WhatsApp (Ex: 47 99999-9999)" required>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn-white" onclick="nextStep(1)">Avançar →</button>
         </div>
       </div>
 
-      <!-- Etapa 2 -->
-      <div class="step" data-step="2">
-        <label>2. Qual o seu principal objetivo ou necessidade hoje?</label>
-        <input type="text" name="objetivo" placeholder="Sua resposta..." required>
-        <div class="buttons">
-          <button type="button" class="prev-btn" onclick="prevStep()">Voltar</button>
-          <button type="button" onclick="nextStep()">Avançar →</button>
+      <!-- ETAPA 2: Seleção da Oficina -->
+      <div class="step" id="step-2">
+        <label class="step-label">2. Qual oficina você gostaria de participar?</label>
+        <div class="options-grid">
+          
+          <label class="option-card" onclick="selectOficina('aquarela')">
+            <input type="radio" name="Oficina Escolhida" value="Aquarela em Molduras (01/08)">
+            <div>
+              <div class="option-title">Aquarela em Molduras</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">Data: 01/08 • 15h</div>
+            </div>
+            <span class="option-badge">Selecione</span>
+          </label>
+
+          <label class="option-card" onclick="selectOficina('bordado')">
+            <input type="radio" name="Oficina Escolhida" value="Bordado de Toalhas (12/08)">
+            <div>
+              <div class="option-title">Bordado de Toalhas</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">Data: 12/08 • 15h</div>
+            </div>
+            <span class="option-badge">Selecione</span>
+          </label>
+
+          <label class="option-card" onclick="selectOficina('porcelana')">
+            <input type="radio" name="Oficina Escolhida" value="Pintura em Porcelana (15/08)">
+            <div>
+              <div class="option-title">Pintura em Porcelana</div>
+              <div style="font-size: 0.85rem; color: var(--text-muted);">Data: 15/08 • 15h</div>
+            </div>
+            <span class="option-badge">Selecione</span>
+          </label>
+
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn-outline" onclick="goToStep(1)">Voltar</button>
+          <button type="button" class="btn-white" onclick="nextStep(2)">Avançar →</button>
         </div>
       </div>
 
-      <!-- Etapa 3 -->
-      <div class="step" data-step="3">
-        <label>3. Qual o seu melhor e-mail para contato?</label>
-        <input type="email" name="email" placeholder="nome@exemplo.com" required>
-        <div class="buttons">
-          <button type="button" class="prev-btn" onclick="prevStep()">Voltar</button>
-          <button type="submit">Enviar Formulário</button>
+      <!-- ETAPA 3: Detalhes da Oficina + Nível de Experiência -->
+      <div class="step" id="step-3">
+        <div id="oficinaDetailsCard" class="info-box">
+          <!-- Conteúdo gerado dinamicamente via JS -->
+        </div>
+
+        <label class="step-label" id="expLabel">3. Qual seu nível de experiência?</label>
+        <div class="options-grid">
+          <label class="option-card" onclick="selectExp('Iniciante')">
+            <input type="radio" name="Nivel de Experiencia" value="Iniciante">
+            <span class="option-title">Iniciante (Nunca pratiquei)</span>
+          </label>
+          <label class="option-card" onclick="selectExp('Intermediário')">
+            <input type="radio" name="Nivel de Experiencia" value="Intermediário">
+            <span class="option-title">Intermediário (Já tenho uma noção)</span>
+          </label>
+          <label class="option-card" onclick="selectExp('Avançado')">
+            <input type="radio" name="Nivel de Experiencia" value="Avançado">
+            <span class="option-title">Avançado (Já pratico)</span>
+          </label>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-outline" onclick="goToStep(2)">Voltar</button>
+          <button type="button" class="btn-white" onclick="nextStep(3)">Avançar →</button>
+        </div>
+      </div>
+
+      <!-- ETAPA 4: Membro do Petit Comité Brera -->
+      <div class="step" id="step-4">
+        <label class="step-label">4. Você é membro do Petit Comité Brera?</label>
+        <div class="options-grid">
+          <label class="option-card" onclick="selectMembro('sim')">
+            <input type="radio" name="Membro Petit Comité" value="Sim">
+            <span class="option-title">Sim, sou membro</span>
+          </label>
+          <label class="option-card" onclick="selectMembro('nao')">
+            <input type="radio" name="Membro Petit Comité" value="Não">
+            <span class="option-title">Não sou membro</span>
+          </label>
+          <label class="option-card" onclick="selectMembro('gostaria')">
+            <input type="radio" name="Membro Petit Comité" value="Não, mas gostaria de conhecer">
+            <span class="option-title">Não, mas gostaria de conhecer</span>
+          </label>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-outline" onclick="goToStep(3)">Voltar</button>
+          <button type="button" class="btn-white" onclick="nextStep(4)">Avançar →</button>
+        </div>
+      </div>
+
+      <!-- ETAPA 4.5: Explicação Exclusiva Petit Comité (Aparece se escolher 'gostaria') -->
+      <div class="step" id="step-petit-info">
+        <div class="info-box">
+          <h3>Petit Comité Brera</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">
+            O <strong>Petit Comité Brera</strong> é um grupo exclusivo de mulheres membros do Brera que desfrutam de experiências refinadas todos os meses: workshops de etiqueta, bate-papos sobre investimentos e saúde mental, encontros de chás da tarde, descontos em oficinas e diversas oportunidades locais.
+          </p>
+          <p style="color: var(--accent-light); font-weight: 500; font-size: 0.95rem;">
+            Mensalidade: R$ 380/mês para acesso a todo esse ecossistema.
+          </p>
+          <div style="margin-top: 1.2rem;">
+            <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20e%20fazer%20parte%20do%20Petit%20Comit%C3%A9%20Brera." target="_blank" class="btn-white" style="width: 100%; text-decoration: none;">✨ Quero Fazer Parte do Petit Comité</a>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-outline" onclick="goToStep(4)">Voltar</button>
+          <button type="button" class="btn-white" onclick="goToStep(5)">Continuar Inscrição da Oficina →</button>
+        </div>
+      </div>
+
+      <!-- ETAPA 5: Forma de Pagamento -->
+      <div class="step" id="step-5">
+        <label class="step-label">5. Como você gostaria de pagar a sua inscrição?</label>
+        <div class="options-grid">
+          
+          <label class="option-card" onclick="selectPagamento('pix_297')">
+            <input type="radio" name="Forma de Pagamento" value="R$ 297,00 à vista (PIX)">
+            <div>
+              <div class="option-title">R$ 297,00 à vista no PIX</div>
+              <div style="font-size: 0.83rem; color: var(--text-muted);">Não-membros Petit Comité</div>
+            </div>
+          </label>
+
+          <label class="option-card" onclick="selectPagamento('cartao_297')">
+            <input type="radio" name="Forma de Pagamento" value="R$ 297,00 parcelado no Cartão">
+            <div>
+              <div class="option-title">R$ 297,00 parcelado no cartão</div>
+              <div style="font-size: 0.83rem; color: var(--text-muted);">Com acréscimos da operadora</div>
+            </div>
+          </label>
+
+          <label class="option-card" onclick="selectPagamento('pix_247')">
+            <input type="radio" name="Forma de Pagamento" value="R$ 247,00 Exclusivo Membro Petit Comité">
+            <div>
+              <div class="option-title">R$ 247,00 (Desconto Exclusivo)</div>
+              <div style="font-size: 0.83rem; color: var(--accent-light);">Exclusivo Membros Petit Comité</div>
+            </div>
+          </label>
+
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn-outline" id="backFromStep5" onclick="goToStep(4)">Voltar</button>
+          <button type="button" class="btn-white" onclick="nextStep(5)">Finalizar Inscrição →</button>
+        </div>
+      </div>
+
+      <!-- ETAPA 6: Resumo & Instrução Final de Pagamento -->
+      <div class="step" id="step-6">
+        <div id="paymentInstructions">
+          <!-- Preenchido via JS conforme a forma de pagamento -->
         </div>
       </div>
 
     </form>
-
-    <div class="success-message" id="successMessage">
-      <h2>Obrigado!</h2>
-      <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem;">Suas informações foram enviadas com sucesso.</p>
-    </div>
   </div>
 
   <script>
     let currentStep = 1;
-    const totalSteps = 3;
+    let selectedOficina = '';
+    let selectedMembroStatus = '';
+    let selectedPagamentoMethod = '';
 
-    function updateProgress() {
-      const percentage = (currentStep / totalSteps) * 100;
+    const oficinasData = {
+      aquarela: {
+        nome: 'Aquarela em Molduras',
+        tipo: 'Aquarela',
+        data: '01/08',
+        horario: '15:00',
+        local: 'R. 3300 n° 450, Balneário Camboriú',
+        preco: 'R$297 (Não-membros) | R$247 (Membros Petit Comité)',
+        desc: 'Oficina de pintura e customização de molduras para o seu retrato em aquarela.',
+        inclui: [
+          'Moldura personalizada',
+          'Materiais de customização',
+          'Pincéis para pintura e tinta própria para aquarela',
+          'Godê e materiais de auxílio',
+          'Curadoria e instruções técnicas com orientação na oficina',
+          'Lanche e aperitivos no local',
+          'Oportunidade para conhecer o Petit Comité Brera'
+        ]
+      },
+      bordado: {
+        nome: 'Bordado de Toalhas',
+        tipo: 'Bordado',
+        data: '12/08',
+        horario: '15:00',
+        local: 'R. 3300 n° 450, Balneário Camboriú',
+        preco: 'R$297 (Não-membros) | R$247 (Membros Petit Comité)',
+        desc: 'Oficina delicada e exclusiva de bordado manual em toalhas de lavabo.',
+        inclui: [
+          'Material completo para bordado',
+          'Orientações técnicas para a prática',
+          'Degustação especial de chás',
+          'Uma toalha de lavabo branca para bordado'
+        ]
+      },
+      porcelana: {
+        nome: 'Pintura em Porcelana',
+        tipo: 'Pintura em Porcelana',
+        data: '15/08',
+        horario: '15:00',
+        local: 'R. 3300 n° 450, Balneário Camboriú',
+        preco: 'R$297 (Não-membros) | R$247 (Membros Petit Comité)',
+        desc: 'Uma tarde exclusiva de oficina de pintura em xícaras de porcelana.',
+        inclui: [
+          'Xícara de porcelana',
+          'Pincéis e tinta própria para porcelana + materiais de pintura',
+          'Ilha de café da tarde',
+          'Networking e bônus Petit Comité Brera'
+        ]
+      }
+    };
+
+    function updateProgress(stepNumber) {
+      const percentage = (stepNumber / 6) * 100;
       document.getElementById('progressBar').style.width = percentage + '%';
     }
 
-    function showStep(step) {
-      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
-      const activeEl = document.querySelector(`.step[data-step="${step}"]`);
-      if(activeEl) activeEl.classList.add('active');
-      updateProgress();
-    }
-
-    function nextStep() {
-      if (currentStep < totalSteps) {
-        currentStep++;
-        showStep(currentStep);
+    function goToStep(stepNumber) {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+      
+      let stepElement;
+      if (stepNumber === 'petit-info') {
+        stepElement = document.getElementById('step-petit-info');
+      } else {
+        stepElement = document.getElementById(`step-${stepNumber}`);
       }
+      
+      if(stepElement) stepElement.classList.add('active');
+      currentStep = stepNumber;
+      if(typeof stepNumber === 'number') updateProgress(stepNumber);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function prevStep() {
-      if (currentStep > 1) {
-        currentStep--;
-        showStep(currentStep);
+    function selectOficina(key) {
+      selectedOficina = key;
+      document.querySelectorAll('#step-2 .option-card').forEach(c => c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      event.currentTarget.querySelector('input').checked = true;
+
+      // Renderiza Detalhes da Oficina na Etapa 3
+      const data = oficinasData[key];
+      const detailsBox = document.getElementById('oficinaDetailsCard');
+      
+      let includesHtml = data.inclui.map(item => `<li>${item}</li>`).join('');
+
+      detailsBox.innerHTML = `
+        <h3>${data.nome}</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
+        <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
+        <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
+        <div class="info-detail"><strong>Investimento:</strong> ${data.preco}</div>
+        
+        <div class="includes-list">
+          <h4>O que está incluso:</h4>
+          <ul>${includesHtml}</ul>
+        </div>
+      `;
+
+      // Ajusta o título da pergunta de experiência
+      document.getElementById('expLabel').innerText = `3. Qual seu nível de experiência em ${data.tipo}?`;
+    }
+
+    function selectExp(val) {
+      document.querySelectorAll('#step-3 .option-card').forEach(c => c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      event.currentTarget.querySelector('input').checked = true;
+    }
+
+    function selectMembro(status) {
+      selectedMembroStatus = status;
+      document.querySelectorAll('#step-4 .option-card').forEach(c => c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      event.currentTarget.querySelector('input').checked = true;
+    }
+
+    function selectPagamento(method) {
+      selectedPagamentoMethod = method;
+      document.querySelectorAll('#step-5 .option-card').forEach(c => c.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      event.currentTarget.querySelector('input').checked = true;
+    }
+
+    function nextStep(fromStep) {
+      if (fromStep === 1) {
+        const nome = document.getElementById('nome').value;
+        const whats = document.getElementById('whatsapp').value;
+        if (!nome || !whats) {
+          alert('Por favor, preencha seu nome e WhatsApp.');
+          return;
+        }
+        goToStep(2);
       }
-    }
+      else if (fromStep === 2) {
+        if (!selectedOficina) {
+          alert('Por favor, selecione uma oficina.');
+          return;
+        }
+        goToStep(3);
+      }
+      else if (fromStep === 3) {
+        const expSelected = document.querySelector('input[name="Nivel de Experiencia"]:checked');
+        if (!expSelected) {
+          alert('Por favor, selecione seu nível de experiência.');
+          return;
+        }
+        goToStep(4);
+      }
+      else if (fromStep === 4) {
+        if (!selectedMembroStatus) {
+          alert('Por favor, selecione uma opção.');
+          return;
+        }
 
-    // Permite avançar pressionando Enter
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        if (currentStep < totalSteps) {
-          nextStep();
+        if (selectedMembroStatus === 'gostaria') {
+          document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep("petit-info")');
+          goToStep('petit-info');
         } else {
-          document.getElementById('typeform').requestSubmit();
+          document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep(4)');
+          goToStep(5);
         }
       }
-    });
+      else if (fromStep === 5) {
+        if (!selectedPagamentoMethod) {
+          alert('Por favor, selecione a forma de pagamento.');
+          return;
+        }
+        
+        // Renderizar Instruções Finais e Disparar Formulário
+        submitAndShowFinalStep();
+      }
+    }
+
+    function copyPixKey() {
+      navigator.clipboard.writeText("54239528000147");
+      const btn = document.getElementById('copyBtn');
+      btn.innerText = 'Copiado!';
+      setTimeout(() => btn.innerText = 'Copiar Chave PIX', 2000);
+    }
+
+    async function submitAndShowFinalStep() {
+      const form = document.getElementById('breraForm');
+      const formData = new FormData(form);
+      const instructionsDiv = document.getElementById('paymentInstructions');
+
+      // Envia silenciosamente para o Web3Forms em segundo plano
+      try {
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          body: formData
+        });
+      } catch (e) {
+        console.log('Erro de envio em segundo plano', e);
+      }
+
+      // Constrói a tela de confirmação de acordo com a forma de pagamento
+      if (selectedPagamentoMethod === 'pix_297' || selectedPagamentoMethod === 'pix_247') {
+        const valorText = selectedPagamentoMethod === 'pix_247' ? 'R$ 247,00' : 'R$ 297,00';
+        instructionsDiv.innerHTML = `
+          <div class="info-box" style="text-align: center;">
+            <h3>Quase lá! Reserva da Vaga</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+              Para garantir sua vaga na oficina, realize o pagamento via PIX no valor de <strong>${valorText}</strong>.
+            </p>
+
+            <div class="pix-box">
+              <span style="font-size: 0.85rem; color: var(--text-muted);">Chave PIX (CNPJ):</span>
+              <div class="pix-key">54.239.528/0001-47</div>
+              <button type="button" id="copyBtn" class="copy-btn" onclick="copyPixKey()">Copiar Chave PIX</button>
+            </div>
+
+            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem;">
+              Após o pagamento, envie o comprovante diretamente para o nosso WhatsApp para receber a confirmação da sua vaga:
+            </p>
+
+            <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Realizei%20a%20minha%20inscri%C3%A7%C3%A3o%20na%20oficina%20do%20Brera%20Group%20e%20estou%20enviando%20o%20comprovante." target="_blank" class="whatsapp-btn">
+              📲 Enviar Comprovante no WhatsApp
+            </a>
+          </div>
+        `;
+      } else {
+        // Opção Cartão
+        instructionsDiv.innerHTML = `
+          <div class="info-box" style="text-align: center;">
+            <h3>Inscrição Registrada!</h3>
+            <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin-top: 0.8rem;">
+              Recebemos sua solicitação de inscrição com pagamento no cartão de crédito.
+            </p>
+            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-top: 0.8rem;">
+              A nossa equipe do Brera Group entrará em contato pelo seu WhatsApp em breve para enviar o link de pagamento parcelado e efetuar a reserva do seu lugar.
+            </p>
+            <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Fiz%20minha%20inscri%C3%A7%C3%A3o%20no%20cart%C3%A3o%20para%20a%20oficina%20do%20Brera%20Group%20e%20gostaria%20de%20antecipar%20meu%20atendimento." target="_blank" class="whatsapp-btn" style="background-color: #ffffff; color: var(--bg-brera);">
+              Falar com a Equipe Brera
+            </a>
+          </div>
+        `;
+      }
+
+      goToStep(6);
+    }
   </script>
 </body>
 </html>
