@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário Exclusivo</title>
+  <style>
+    :root {
+      --bg-color: #0f1016;
+      --card-bg: #181a24;
+      --accent-color: #d4af37; /* Tom dourado refinado */
+      --text-color: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Barra de Progresso */
+    .progress-bar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(255,255,255,0.05);
+    }
+    .progress-bar {
+      height: 100%;
+      width: 33%;
+      background: var(--accent-color);
+      transition: width 0.4s ease;
+    }
+
+    /* Container das Etapas */
+    .form-container {
+      width: 100%;
+      max-width: 540px;
+      padding: 2rem;
+      position: relative;
+    }
+
+    .step {
+      display: none;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.4s ease;
+    }
+
+    .step.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    label {
+      font-size: 1.5rem;
+      font-weight: 300;
+      display: block;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      color: var(--text-color);
+      font-size: 1.25rem;
+      padding: 0.8rem 0;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent-color);
+    }
+
+    .buttons {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      background: var(--accent-color);
+      color: #000;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.3s;
+    }
+
+    button:hover { opacity: 0.9; }
+
+    button.prev-btn {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .success-message {
+      text-align: center;
+      display: none;
+      font-size: 1.4rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress-bar-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="form-container">
+    <form id="typeform" action="https://api.web3forms.com/submit" method="POST">
+      
+      <!-- Substitua com a sua chave gratuita do web3forms.com -->
+      <input type="hidden" name="access_key" value="SUA_CHAVE_AQUI">
+
+      <!-- Etapa 1 -->
+      <div class="step active" data-step="1">
+        <label>1. Como você gostaria de ser chamada(o)?</label>
+        <input type="text" name="nome" placeholder="Digite seu nome..." required>
+        <div class="buttons">
+          <button type="button" onclick="nextStep()">Avançar →</button>
+        </div>
+      </div>
+
+      <!-- Etapa 2 -->
+      <div class="step" data-step="2">
+        <label>2. Qual o seu principal objetivo ou necessidade hoje?</label>
+        <input type="text" name="objetivo" placeholder="Sua resposta..." required>
+        <div class="buttons">
+          <button type="button" class="prev-btn" onclick="prevStep()">Voltar</button>
+          <button type="button" onclick="nextStep()">Avançar →</button>
+        </div>
+      </div>
+
+      <!-- Etapa 3 -->
+      <div class="step" data-step="3">
+        <label>3. Qual o seu melhor e-mail para contato?</label>
+        <input type="email" name="email" placeholder="nome@exemplo.com" required>
+        <div class="buttons">
+          <button type="button" class="prev-btn" onclick="prevStep()">Voltar</button>
+          <button type="submit">Enviar Formulário</button>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="success-message" id="successMessage">
+      <h2>Obrigado!</h2>
+      <p style="margin-top: 1rem; color: var(--text-muted); font-size: 1rem;">Suas informações foram enviadas com sucesso.</p>
+    </div>
+  </div>
+
+  <script>
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    function updateProgress() {
+      const percentage = (currentStep / totalSteps) * 100;
+      document.getElementById('progressBar').style.width = percentage + '%';
+    }
+
+    function showStep(step) {
+      document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+      const activeEl = document.querySelector(`.step[data-step="${step}"]`);
+      if(activeEl) activeEl.classList.add('active');
+      updateProgress();
+    }
+
+    function nextStep() {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 1) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+
+    // Permite avançar pressionando Enter
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        if (currentStep < totalSteps) {
+          nextStep();
+        } else {
+          document.getElementById('typeform').requestSubmit();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
