@@ -800,31 +800,34 @@
         console.log('Erro de envio em segundo plano', e);
       }
 
-      if (selectedPagamentoMethod === 'pix_297' || selectedPagamentoMethod === 'pix_247') {
-        const valorText = selectedPagamentoMethod === 'pix_247' ? 'R$ 247,00' : 'R$ 297,00';
-        instructionsDiv.innerHTML = `
-          <div class="info-box" style="text-align: center;">
-            <h3>Quase lá! Reserva da Vaga</h3>
-            <p style="color: var(--text-muted); font-size: 0.95rem;">
-              Para garantir sua vaga na oficina, realize o pagamento via PIX no valor de <strong>${valorText}</strong>.
-            </p>
+     if (selectedPagamentoMethod === 'pix_297' || selectedPagamentoMethod === 'pix_247' || selectedPagamentoMethod === 'pix_127') {
+  let valorText = 'R$ 297,00';
+  if (selectedPagamentoMethod === 'pix_247') valorText = 'R$ 247,00';
+  if (selectedPagamentoMethod === 'pix_127') valorText = 'R$ 127,00';
 
-            <div class="pix-box">
-              <span style="font-size: 0.85rem; color: var(--text-muted);">Chave PIX (CNPJ):</span>
-              <div class="pix-key">54.239.528/0001-47</div>
-              <button type="button" id="copyBtn" class="copy-btn" onclick="copyPixKey()">Copiar Chave PIX</button>
-            </div>
+  instructionsDiv.innerHTML = `
+    <div class="info-box" style="text-align: center;">
+      <h3>Quase lá! Reserva da Vaga</h3>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Para garantir sua vaga na oficina, realize o pagamento via PIX no valor de <strong>${valorText}</strong>.
+      </p>
 
-            <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem;">
-              Após o pagamento, envie o comprovante diretamente para o nosso WhatsApp para receber a confirmação da sua vaga:
-            </p>
+      <div class="pix-box">
+        <span style="font-size: 0.85rem; color: var(--text-muted);">Chave PIX (CNPJ):</span>
+        <div class="pix-key">54.239.528/0001-47</div>
+        <button type="button" id="copyBtn" class="copy-btn" onclick="copyPixKey()">Copiar Chave PIX</button>
+      </div>
 
-            <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Realizei%20a%20minha%20inscri%C3%A7%C3%A3o%20na%20oficina%20do%20Brera%20Group%20e%20estou%20enviando%20o%20comprovante." target="_blank" class="whatsapp-btn">
-              Enviar Comprovante no WhatsApp
-            </a>
-          </div>
-        `;
-      } else {
+      <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem;">
+        Após o pagamento, envie o comprovante diretamente para o nosso WhatsApp para receber a confirmação da sua vaga:
+      </p>
+
+      <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Realizei%20a%20minha%20inscri%C3%A7%C3%A3o%20na%20oficina%20do%20Brera%20Group%20e%20estou%20enviando%20o%20comprovante." target="_blank" class="whatsapp-btn">
+        Enviar Comprovante no WhatsApp
+      </a>
+    </div>
+  `;
+} else {
         instructionsDiv.innerHTML = `
           <div class="info-box" style="text-align: center;">
             <h3>Inscrição Registrada!</h3>
