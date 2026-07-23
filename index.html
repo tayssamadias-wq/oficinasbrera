@@ -811,12 +811,26 @@
       goToStep(3);
     }
     else if (fromStep === 3) {
-      const expSelected = document.querySelector('input[name="Nivel de Experiencia"]:checked');
-      if (!expSelected) {
-        alert('Por favor, selecione seu nível de experiência.');
+      const radioSelected = document.querySelector('#step-3 input[type="radio"]:checked');
+      if (!radioSelected) {
+        alert('Por favor, selecione uma opção.');
         return;
       }
-      goToStep(4);
+
+      // Validação especial se selecionou menor de 6 anos
+      if (radioSelected.value === 'Menor de 6 anos') {
+        alert('Infelizmente essa oficina é recomendada apenas para crianças a partir de 6 anos.');
+        return;
+      }
+
+      // Se for a oficina de Customização, PULA a Etapa 4 e vai direto para a 5
+      if (selectedOficina === 'customizacao') {
+        document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep(3)');
+        goToStep(5);
+      } else {
+        document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep(4)');
+        goToStep(4);
+      }
     }
     else if (fromStep === 4) {
       if (!selectedMembroStatus) {
