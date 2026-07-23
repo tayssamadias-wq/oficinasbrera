@@ -567,6 +567,7 @@
     let selectedOficina = '';
     let selectedMembroStatus = '';
     let selectedPagamentoMethod = '';
+    let step1Sent = false;
 
     const oficinasData = {
       aquarela: {
@@ -698,6 +699,20 @@
           alert('Por favor, preencha seu nome e WhatsApp.');
           return;
         }
+        if (!step1Sent) {
+    const partialData = new FormData();
+    partialData.append('access_key', '3c32712d-7f7b-4112-affe-d3a22f37db79');
+    partialData.append('subject', 'NOVO LEAD (Etapa 1 Iniciada) - Brera Group');
+    partialData.append('Nome Completo', nome);
+    partialData.append('WhatsApp', whats);
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: partialData
+    }).catch(e => console.log('Envio parcial em segundo plano', e));
+
+    step1Sent = true;
+  }
         goToStep(2);
       }
       else if (fromStep === 2) {
