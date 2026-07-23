@@ -857,6 +857,7 @@ function selectOficina(key, element) {
 
       // Se for a oficina de Customização, PULA a Etapa 4 e vai direto para a 5
       if (selectedOficina === 'customizacao') {
+        renderPaymentStepOptions();
         document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep(3)');
         goToStep(5);
       } else {
