@@ -572,280 +572,347 @@
   </div>
 
   <script>
-    let currentStep = 1;
-    let selectedOficina = '';
-    let selectedMembroStatus = '';
-    let selectedPagamentoMethod = '';
-    let step1Sent = false;
+  let currentStep = 1;
+  let selectedOficina = '';
+  let selectedMembroStatus = '';
+  let selectedPagamentoMethod = '';
+  let step1Sent = false;
 
-    const oficinasData = {
-      aquarela: {
-        nome: 'Aquarela em Molduras',
-        vagas: 'Restam 6 vagas',
-        tipo: 'Aquarela',
-        data: '01/08',
-        horario: '15:00',
-        local: 'R. 3300 n° 450, Balneário Camboriú',
-        preco: 'R$297 (Não-membros) | R$247 (Membros Petit Comité)',
-        desc: 'Oficina de pintura e customização de molduras para o seu retrato em aquarela.',
-        inclui: [
-          'Moldura personalizada',
-          'Materiais de customização',
-          'Pincéis para pintura e tinta própria para aquarela',
-          'Godê e materiais de auxílio',
-          'Curadoria e instruções técnicas com orientação na oficina',
-          'Lanche e aperitivos no local',
-          'Oportunidade para conhecer o Petit Comité Brera'
-        ]
-      },
-      customizacao: {
-  nome: 'Customização de Escovas',
-  tipo: 'oficinas pela criança/adolescente',
-  data: '01/08',
-  horario: '09:30',
-  local: 'R. 3300 n° 450, Balneário Camboriú',
-  preco: 'R$ 127,00',
-  desc: 'Oficina divertida e criativa de customização de escovas de cabelo de bambu para crianças e adolescentes, com pintura personalizada, iniciais e apliques.',
-  inclui: [
-    'Escova de bambu antifrizz de alta qualidade',
-    'Tintas, pincéis e materiais de pintura personalizados',
-    'Apliques, pedrarias e elementos decorativos',
-    'Orientação lúdica e acompanhamento durante a produção',
-    'Recreadora disponível durante o período da Oficina',
-    'Mesa de aperitivos e bebidas à disposição'
-  ]
-},
-      bordado: {
-        nome: 'Bordado de Toalhas',
-        vagas: 'Restam 9 vagas',
-        tipo: 'Bordado',
-        data: '12/08',
-        horario: '15:00',
-        local: 'R. 3300 n° 450, Balneário Camboriú',
-        preco: 'R$297 (Não-membros) | R$247 (Membros Petit Comité)',
-        desc: 'Oficina delicada e exclusiva de bordado manual em toalhas de lavabo.',
-        inclui: [
-          'Material completo para bordado',
-          'Orientações técnicas para a prática',
-          'Degustação especial de chás',
-          'Uma toalha de lavabo branca para bordado'
-        ]
-      },
-      porcelana: {
-        nome: 'Pintura em Porcelana',
-        vagas: 'Restam 11 vagas',
-        tipo: 'Pintura em Porcelana',
-        data: '15/08',
-        horario: '15:00',
-        local: 'R. 3300 n° 450, Balneário Camboriú',
-        preco: 'R$297 (Não-membros) | R$247 (Membros Petit Comité)',
-        desc: 'Uma tarde exclusiva de oficina de pintura em xícaras de porcelana.',
-        inclui: [
-          'Xícara de porcelana',
-          'Pincéis e tinta própria para porcelana + materiais de pintura',
-          'Ilha de café da tarde',
-          'Networking e bônus Petit Comité Brera'
-        ]
-      }
-    };
-
-    function updateProgress(stepNumber) {
-      const percentage = (stepNumber / 6) * 100;
-      document.getElementById('progressBar').style.width = percentage + '%';
+  const oficinasData = {
+    aquarela: {
+      nome: 'Aquarela em Molduras',
+      vagas: 'Restam 6 vagas',
+      tipo: 'Aquarela',
+      data: '01/08',
+      horario: '15:00',
+      local: 'R. 3300 n° 450, Balneário Camboriú',
+      preco: 'R$ 297 (Não-membros) | R$ 247 (Membros Petit Comité)',
+      desc: 'Oficina de pintura e customização de molduras para o seu retrato em aquarela.',
+      inclui: [
+        'Moldura personalizada',
+        'Materiais de customização',
+        'Pincéis para pintura e tinta própria para aquarela',
+        'Godê e materiais de auxílio',
+        'Curadoria e instruções técnicas com orientação na oficina',
+        'Lanche e aperitivos no local',
+        'Oportunidade para conhecer o Petit Comité Brera'
+      ]
+    },
+    customizacao: {
+      nome: 'Customização de Escovas',
+      vagas: 'Vagas limitadas',
+      tipo: 'Customização',
+      data: '01/08',
+      horario: '09:30',
+      local: 'R. 3300 n° 450, Balneário Camboriú',
+      preco: 'R$ 127,00',
+      desc: 'Oficina divertida e criativa de customização de escovas de cabelo de bambu para crianças e adolescentes, com pintura personalizada, iniciais e apliques.',
+      inclui: [
+        'Escova de bambu antifrizz de alta qualidade',
+        'Tintas, pincéis e materiais de pintura personalizados',
+        'Apliques, pedrarias e elementos decorativos',
+        'Orientação lúdica e acompanhamento durante a produção',
+        'Recreadora disponível durante o período da Oficina',
+        'Mesa de aperitivos e bebidas à disposição'
+      ]
+    },
+    bordado: {
+      nome: 'Bordado de Toalhas',
+      vagas: 'Restam 9 vagas',
+      tipo: 'Bordado',
+      data: '12/08',
+      horario: '15:00',
+      local: 'R. 3300 n° 450, Balneário Camboriú',
+      preco: 'R$ 297 (Não-membros) | R$ 247 (Membros Petit Comité)',
+      desc: 'Oficina delicada e exclusiva de bordado manual em toalhas de lavabo.',
+      inclui: [
+        'Material completo para bordado',
+        'Orientações técnicas para a prática',
+        'Degustação especial de chás',
+        'Uma toalha de lavabo branca para bordado'
+      ]
+    },
+    porcelana: {
+      nome: 'Pintura em Porcelana',
+      vagas: 'Restam 11 vagas',
+      tipo: 'Pintura em Porcelana',
+      data: '15/08',
+      horario: '15:00',
+      local: 'R. 3300 n° 450, Balneário Camboriú',
+      preco: 'R$ 297 (Não-membros) | R$ 247 (Membros Petit Comité)',
+      desc: 'Uma tarde exclusiva de oficina de pintura em xícaras de porcelana.',
+      inclui: [
+        'Xícara de porcelana',
+        'Pincéis e tinta própria para porcelana + materiais de pintura',
+        'Ilha de café da tarde',
+        'Networking e bônus Petit Comité Brera'
+      ]
     }
+  };
 
-    function goToStep(stepNumber) {
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-      
-      let stepElement;
-      if (stepNumber === 'petit-info') {
-        stepElement = document.getElementById('step-petit-info');
-      } else {
-        stepElement = document.getElementById(`step-${stepNumber}`);
-      }
-      
-      if(stepElement) stepElement.classList.add('active');
-      currentStep = stepNumber;
-      if(typeof stepNumber === 'number') updateProgress(stepNumber);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  function updateProgress(stepNumber) {
+    let percentage = 0;
+    if (stepNumber === 'petit-info') {
+      percentage = 70;
+    } else {
+      percentage = (stepNumber / 6) * 100;
     }
-
-    function selectOficina(key) {
-      selectedOficina = key;
-      document.querySelectorAll('#step-2 .option-card').forEach(c => c.classList.remove('selected'));
-      event.currentTarget.classList.add('selected');
-      event.currentTarget.querySelector('input').checked = true;
-
-      const data = oficinasData[key];
-      const detailsBox = document.getElementById('oficinaDetailsCard');
-      let includesHtml = data.inclui.map(item => `<li>${item}</li>`).join('');
-
-      detailsBox.innerHTML = `
-        <h3>${data.nome}</h3>
-        <div style="color: #c84b4b; font-size: 0.85rem; font-weight: 600; margin-top: -0.4rem; margin-bottom: 0.9rem;">${data.vagas}</div>
-        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
-        <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
-        <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
-        <div class="info-detail"><strong>Investimento:</strong> ${data.preco}</div>
-        
-        <div class="includes-list">
-          <h4>O que está incluso:</h4>
-          <ul>${includesHtml}</ul>
-        </div>
-      `;
-
-      document.getElementById('expLabel').innerText = `3. Qual seu nível de experiência em ${data.tipo}?`;
-    }
-
-    function selectExp(val) {
-      document.querySelectorAll('#step-3 .option-card').forEach(c => c.classList.remove('selected'));
-      event.currentTarget.classList.add('selected');
-      event.currentTarget.querySelector('input').checked = true;
-    }
-
-    function selectMembro(status) {
-      selectedMembroStatus = status;
-      document.querySelectorAll('#step-4 .option-card').forEach(c => c.classList.remove('selected'));
-      event.currentTarget.classList.add('selected');
-      event.currentTarget.querySelector('input').checked = true;
-    }
-
-    function selectPagamento(method) {
-      selectedPagamentoMethod = method;
-      document.querySelectorAll('#step-5 .option-card').forEach(c => c.classList.remove('selected'));
-      event.currentTarget.classList.add('selected');
-      event.currentTarget.querySelector('input').checked = true;
-    }
-
-    function nextStep(fromStep) {
-      if (fromStep === 1) {
-        const nome = document.getElementById('nome').value;
-        const whats = document.getElementById('whatsapp').value;
-        if (!nome || !whats) {
-          alert('Por favor, preencha seu nome e WhatsApp.');
-          return;
-        }
-        if (!step1Sent) {
-    const partialData = new FormData();
-    partialData.append('access_key', '3c32712d-7f7b-4112-affe-d3a22f37db79');
-    partialData.append('subject', 'NOVO LEAD (Etapa 1 Iniciada) - Brera Group');
-    partialData.append('Nome Completo', nome);
-    partialData.append('WhatsApp', whats);
-
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: partialData
-    }).catch(e => console.log('Envio parcial em segundo plano', e));
-
-    step1Sent = true;
+    document.getElementById('progressBar').style.width = percentage + '%';
   }
-        goToStep(2);
-      }
-      else if (fromStep === 2) {
-        if (!selectedOficina) {
-          alert('Por favor, selecione uma oficina.');
-          return;
-        }
-        goToStep(3);
-      }
-      else if (fromStep === 3) {
-        const expSelected = document.querySelector('input[name="Nivel de Experiencia"]:checked');
-        if (!expSelected) {
-          alert('Por favor, selecione seu nível de experiência.');
-          return;
-        }
-        goToStep(4);
-      }
-      else if (fromStep === 4) {
-        if (!selectedMembroStatus) {
-          alert('Por favor, selecione uma opção.');
-          return;
-        }
 
-        if (selectedMembroStatus === 'gostaria') {
-          document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep("petit-info")');
-          goToStep('petit-info');
-        } else {
-          document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep(4)');
-          goToStep(5);
-        }
-      }
-      else if (fromStep === 5) {
-        if (!selectedPagamentoMethod) {
-          alert('Por favor, selecione a forma de pagamento.');
-          return;
-        }
-        submitAndShowFinalStep();
-      }
+  function goToStep(stepNumber) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    
+    let stepElement;
+    if (stepNumber === 'petit-info') {
+      stepElement = document.getElementById('step-petit-info');
+    } else {
+      stepElement = document.getElementById(`step-${stepNumber}`);
     }
+    
+    if(stepElement) stepElement.classList.add('active');
+    currentStep = stepNumber;
+    updateProgress(stepNumber);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 
-    function copyPixKey() {
-      navigator.clipboard.writeText("54239528000147");
-      const btn = document.getElementById('copyBtn');
-      btn.innerText = 'Copiado!';
-      setTimeout(() => btn.innerText = 'Copiar Chave PIX', 2000);
+  function selectOficina(key, element) {
+    selectedOficina = key;
+    document.querySelectorAll('#step-2 .option-card').forEach(c => c.classList.remove('selected'));
+    
+    const target = element || event.currentTarget;
+    target.classList.add('selected');
+    target.querySelector('input').checked = true;
+
+    const data = oficinasData[key];
+    const detailsBox = document.getElementById('oficinaDetailsCard');
+    let includesHtml = data.inclui.map(item => `<li>${item}</li>`).join('');
+
+    detailsBox.innerHTML = `
+      <h3>${data.nome}</h3>
+      <div style="color: #c84b4b; font-size: 0.85rem; font-weight: 600; margin-top: -0.4rem; margin-bottom: 0.9rem;">${data.vagas}</div>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
+      <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
+      <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
+      <div class="info-detail"><strong>Investimento:</strong> ${data.preco}</div>
+      
+      <div class="includes-list">
+        <h4>O que está incluso:</h4>
+        <ul>${includesHtml}</ul>
+      </div>
+    `;
+
+    document.getElementById('expLabel').innerText = `3. Qual seu nível de experiência em ${data.tipo}?`;
+  }
+
+  function selectExp(val, element) {
+    document.querySelectorAll('#step-3 .option-card').forEach(c => c.classList.remove('selected'));
+    const target = element || event.currentTarget;
+    target.classList.add('selected');
+    target.querySelector('input').checked = true;
+  }
+
+  function selectMembro(status, element) {
+    selectedMembroStatus = status;
+    document.querySelectorAll('#step-4 .option-card').forEach(c => c.classList.remove('selected'));
+    const target = element || event.currentTarget;
+    target.classList.add('selected');
+    target.querySelector('input').checked = true;
+  }
+
+  function selectPagamento(method, element) {
+    selectedPagamentoMethod = method;
+    document.querySelectorAll('#step-5 .option-card').forEach(c => c.classList.remove('selected'));
+    const target = element || event.currentTarget;
+    target.classList.add('selected');
+    target.querySelector('input').checked = true;
+  }
+
+  // Renderiza opções de pagamento coerentes com a oficina e status do usuário
+  function renderPaymentStepOptions() {
+    const grid = document.getElementById('step5Options');
+    selectedPagamentoMethod = ''; // Reseta seleção para forçar escolha consciente
+
+    if (selectedOficina === 'customizacao') {
+      grid.innerHTML = `
+        <label class="option-card" onclick="selectPagamento('pix_127', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 127,00 à vista (PIX)">
+          <div class="option-info-wrapper">
+            <div class="option-title">R$ 127,00 à vista no PIX</div>
+            <div style="font-size: 0.83rem; color: var(--text-muted);">Inscrição Oficina Infantil</div>
+          </div>
+        </label>
+        <label class="option-card" onclick="selectPagamento('cartao_127', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 127,00 Cartão de Crédito">
+          <div class="option-info-wrapper">
+            <div class="option-title">R$ 127,00 no Cartão de Crédito</div>
+            <div style="font-size: 0.83rem; color: var(--text-muted);">Link enviado via WhatsApp</div>
+          </div>
+        </label>
+      `;
+    } else {
+      grid.innerHTML = `
+        <label class="option-card" onclick="selectPagamento('pix_297', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 297,00 à vista (PIX)">
+          <div class="option-info-wrapper">
+            <div class="option-title">R$ 297,00 à vista no PIX</div>
+            <div style="font-size: 0.83rem; color: var(--text-muted);">Não-membros Petit Comité</div>
+          </div>
+        </label>
+
+        <label class="option-card" onclick="selectPagamento('cartao_297', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 297,00 parcelado no Cartão">
+          <div class="option-info-wrapper">
+            <div class="option-title">R$ 297,00 parcelado no cartão</div>
+            <div style="font-size: 0.83rem; color: var(--text-muted);">Com acréscimos da operadora</div>
+          </div>
+        </label>
+
+        <label class="option-card" onclick="selectPagamento('pix_247', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 247,00 Exclusivo Membro Petit Comité">
+          <div class="option-info-wrapper">
+            <div class="option-title">R$ 247,00 (Desconto Exclusivo)</div>
+            <div style="font-size: 0.83rem; color: var(--accent-light);">Exclusivo Membros Petit Comité</div>
+          </div>
+        </label>
+      `;
     }
+  }
 
-    async function submitAndShowFinalStep() {
-      const form = document.getElementById('breraForm');
-      const formData = new FormData(form);
-      const instructionsDiv = document.getElementById('paymentInstructions');
+  function nextStep(fromStep) {
+    if (fromStep === 1) {
+      const nome = document.getElementById('nome').value.trim();
+      const whats = document.getElementById('whatsapp').value.trim();
+      if (!nome || !whats) {
+        alert('Por favor, preencha seu nome e WhatsApp.');
+        return;
+      }
+      if (!step1Sent) {
+        const partialData = new FormData();
+        partialData.append('access_key', '3c32712d-7f7b-4112-affe-d3a22f37db79');
+        partialData.append('subject', 'NOVO LEAD (Etapa 1 Iniciada) - Brera Group');
+        partialData.append('Nome Completo', nome);
+        partialData.append('WhatsApp', whats);
 
-      try {
         fetch('https://api.web3forms.com/submit', {
           method: 'POST',
-          body: formData
-        });
-      } catch (e) {
-        console.log('Erro de envio em segundo plano', e);
+          body: partialData
+        }).catch(e => console.log('Envio parcial em segundo plano', e));
+
+        step1Sent = true;
       }
-
-     if (selectedPagamentoMethod === 'pix_297' || selectedPagamentoMethod === 'pix_247' || selectedPagamentoMethod === 'pix_127') {
-  let valorText = 'R$ 297,00';
-  if (selectedPagamentoMethod === 'pix_247') valorText = 'R$ 247,00';
-  if (selectedPagamentoMethod === 'pix_127') valorText = 'R$ 127,00';
-
-  instructionsDiv.innerHTML = `
-    <div class="info-box" style="text-align: center;">
-      <h3>Quase lá! Reserva da Vaga</h3>
-      <p style="color: var(--text-muted); font-size: 0.95rem;">
-        Para garantir sua vaga na oficina, realize o pagamento via PIX no valor de <strong>${valorText}</strong>.
-      </p>
-
-      <div class="pix-box">
-        <span style="font-size: 0.85rem; color: var(--text-muted);">Chave PIX (CNPJ):</span>
-        <div class="pix-key">54.239.528/0001-47</div>
-        <button type="button" id="copyBtn" class="copy-btn" onclick="copyPixKey()">Copiar Chave PIX</button>
-      </div>
-
-      <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem;">
-        Após o pagamento, envie o comprovante diretamente para o nosso WhatsApp para receber a confirmação da sua vaga:
-      </p>
-
-      <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Realizei%20a%20minha%20inscri%C3%A7%C3%A3o%20na%20oficina%20do%20Brera%20Group%20e%20estou%20enviando%20o%20comprovante." target="_blank" class="whatsapp-btn">
-        Enviar Comprovante no WhatsApp
-      </a>
-    </div>
-  `;
-} else {
-        instructionsDiv.innerHTML = `
-          <div class="info-box" style="text-align: center;">
-            <h3>Inscrição Registrada!</h3>
-            <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin-top: 0.8rem;">
-              Recebemos sua solicitação de inscrição com pagamento no cartão de crédito.
-            </p>
-            <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-top: 0.8rem;">
-              A nossa equipe do Brera Group entrará em contato pelo seu WhatsApp em breve para enviar o link de pagamento parcelado e efetuar a reserva do seu lugar.
-            </p>
-            <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Fiz%20minha%20inscri%C3%A7%C3%A3o%20no%20cart%C3%A3o%20para%20a%20oficina%20do%20Brera%20Group%20e%20gostaria%20de%20antecipar%20meu%20atendimento." target="_blank" class="whatsapp-btn" style="background-color: #ffffff; color: var(--bg-brera);">
-              Falar com a Equipe Brera
-            </a>
-          </div>
-        `;
-      }
-
-      goToStep(6);
+      goToStep(2);
     }
-  </script>
+    else if (fromStep === 2) {
+      if (!selectedOficina) {
+        alert('Por favor, selecione uma oficina.');
+        return;
+      }
+      goToStep(3);
+    }
+    else if (fromStep === 3) {
+      const expSelected = document.querySelector('input[name="Nivel de Experiencia"]:checked');
+      if (!expSelected) {
+        alert('Por favor, selecione seu nível de experiência.');
+        return;
+      }
+      goToStep(4);
+    }
+    else if (fromStep === 4) {
+      if (!selectedMembroStatus) {
+        alert('Por favor, selecione uma opção.');
+        return;
+      }
+
+      renderPaymentStepOptions();
+
+      if (selectedMembroStatus === 'gostaria') {
+        document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep("petit-info")');
+        goToStep('petit-info');
+      } else {
+        document.getElementById('backFromStep5').setAttribute('onclick', 'goToStep(4)');
+        goToStep(5);
+      }
+    }
+    else if (fromStep === 5) {
+      if (!selectedPagamentoMethod) {
+        alert('Por favor, selecione a forma de pagamento.');
+        return;
+      }
+      submitAndShowFinalStep();
+    }
+  }
+
+  function copyPixKey() {
+    navigator.clipboard.writeText("54239528000147");
+    const btn = document.getElementById('copyBtn');
+    btn.innerText = 'Copiado!';
+    setTimeout(() => btn.innerText = 'Copiar Chave PIX', 2000);
+  }
+
+  async function submitAndShowFinalStep() {
+    const form = document.getElementById('breraForm');
+    const formData = new FormData(form);
+    const instructionsDiv = document.getElementById('paymentInstructions');
+
+    // Envio oficial do formulário completo
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+    } catch (e) {
+      console.log('Erro ao enviar dados no segundo plano', e);
+    }
+
+    const isPix = ['pix_297', 'pix_247', 'pix_127'].includes(selectedPagamentoMethod);
+
+    if (isPix) {
+      let valorText = 'R$ 297,00';
+      if (selectedPagamentoMethod === 'pix_247') valorText = 'R$ 247,00';
+      if (selectedPagamentoMethod === 'pix_127') valorText = 'R$ 127,00';
+
+      instructionsDiv.innerHTML = `
+        <div class="info-box" style="text-align: center;">
+          <h3>Quase lá! Reserva da Vaga</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Para garantir sua vaga na oficina, realize o pagamento via PIX no valor de <strong>${valorText}</strong>.
+          </p>
+
+          <div class="pix-box">
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Chave PIX (CNPJ):</span>
+            <div class="pix-key">54.239.528/0001-47</div>
+            <button type="button" id="copyBtn" class="copy-btn" onclick="copyPixKey()">Copiar Chave PIX</button>
+          </div>
+
+          <p style="color: var(--text-muted); font-size: 0.88rem; margin-top: 1rem;">
+            Após o pagamento, envie o comprovante diretamente para o nosso WhatsApp para receber a confirmação da sua vaga:
+          </p>
+
+          <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Realizei%20a%20minha%20inscri%C3%A7%C3%A3o%20na%20oficina%20do%20Brera%20Group%20e%20estou%20enviando%20o%20comprovante." target="_blank" class="whatsapp-btn">
+            Enviar Comprovante no WhatsApp
+          </a>
+        </div>
+      `;
+    } else {
+      instructionsDiv.innerHTML = `
+        <div class="info-box" style="text-align: center;">
+          <h3>Inscrição Registrada!</h3>
+          <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; margin-top: 0.8rem;">
+            Recebemos sua solicitação de inscrição com pagamento no cartão de crédito.
+          </p>
+          <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.6; margin-top: 0.8rem;">
+            A nossa equipe do Brera Group entrará em contato pelo seu WhatsApp em breve para enviar o link de pagamento parcelado e efetuar a reserva do seu lugar.
+          </p>
+          <a href="https://wa.me/5547991839246?text=Ol%C3%A1!%20Fiz%20minha%20inscri%C3%A7%C3%A3o%20no%20cart%C3%A3o%20para%20a%20oficina%20do%20Brera%20Group%20e%20gostaria%20de%20antecipar%20meu%20atendimento." target="_blank" class="whatsapp-btn" style="background-color: #ffffff; color: var(--bg-brera);">
+            Falar com a Equipe Brera
+          </a>
+        </div>
+      `;
+    }
+
+    goToStep(6);
+  }
+</script>
 </body>
 </html>
