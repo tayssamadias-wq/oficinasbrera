@@ -677,33 +677,65 @@
   }
 
 function selectOficina(key, element) {
-  selectedOficina = key;
-  document.querySelectorAll('#step-2 .option-card').forEach(c => c.classList.remove('selected'));
-
-  const target = element || event.currentTarget;
-  target.classList.add('selected');
-  target.querySelector('input').checked = true;
-
-  const data = oficinasData[key];
-  const detailsBox = document.getElementById('oficinaDetailsCard');
-  let includesHtml = data.inclui.map(item => `<li>${item}</li>`).join('');
-
-  detailsBox.innerHTML = `
-    <h3>${data.nome}</h3>
-    <div style="color: #c84b4b; font-size: 0.85rem; font-weight: 600; margin-top: -0.4rem; margin-bottom: 0.9rem;">${data.vagas}</div>
-    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
-    <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
-    <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
-    <div class="info-detail"><strong>Investimento:</strong> ${data.preco}</div>
+    selectedOficina = key;
+    document.querySelectorAll('#step-2 .option-card').forEach(c => c.classList.remove('selected'));
     
-    <div class="includes-list">
-      <h4>O que está incluso:</h4>
-      <ul>${includesHtml}</ul>
-    </div>
-  `;
+    const target = element || event.currentTarget;
+    target.classList.add('selected');
+    target.querySelector('input').checked = true;
 
-  document.getElementById('expLabel').innerText = `3. Qual seu nível de experiência em ${data.tipo}?`;
-}
+    const data = oficinasData[key];
+    const detailsBox = document.getElementById('oficinaDetailsCard');
+    let includesHtml = data.inclui.map(item => `<li>${item}</li>`).join('');
+
+    detailsBox.innerHTML = `
+      <h3>${data.nome}</h3>
+      <div style="color: #c84b4b; font-size: 0.85rem; font-weight: 600; margin-top: -0.4rem; margin-bottom: 0.9rem;">${data.vagas}</div>
+      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
+      <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
+      <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
+      <div class="info-detail"><strong>Investimento:</strong> ${data.preco}</div>
+      
+      <div class="includes-list">
+        <h4>O que está incluso:</h4>
+        <ul>${includesHtml}</ul>
+      </div>
+    `;
+
+    // Atualiza título e botões da Etapa 3 conforme a oficina escolhida
+    const expLabel = document.getElementById('expLabel');
+    const step3Options = document.getElementById('step3Options');
+
+    if (key === 'customizacao') {
+      expLabel.innerText = '3. Qual a idade da criança que irá participar?';
+      step3Options.innerHTML = `
+        <label class="option-card" onclick="selectExp('Menor de 6 anos', this)">
+          <input type="radio" name="Idade da Crianca" value="Menor de 6 anos">
+          <span class="option-title">Menor de 6 anos</span>
+        </label>
+        <label class="option-card" onclick="selectExp('A partir de 6 anos', this)">
+          <input type="radio" name="Idade da Crianca" value="A partir de 6 anos">
+          <span class="option-title">A partir de 6 anos</span>
+        </label>
+      `;
+    } else {
+      expLabel.innerText = `3. Qual seu nível de experiência em ${data.tipo}?`;
+      step3Options.innerHTML = `
+        <label class="option-card" onclick="selectExp('Iniciante', this)">
+          <input type="radio" name="Nivel de Experiencia" value="Iniciante">
+          <span class="option-title">Iniciante (Nunca pratiquei)</span>
+        </label>
+        <label class="option-card" onclick="selectExp('Intermediário', this)">
+          <input type="radio" name="Nivel de Experiencia" value="Intermediário">
+          <span class="option-title">Intermediário (Já tenho uma noção)</span>
+        </label>
+        <label class="option-card" onclick="selectExp('Avançado', this)">
+          <input type="radio" name="Nivel de Experiencia" value="Avançado">
+          <span class="option-title">Avançado (Já pratico)</span>
+        </label>
+      `;
+    }
+  }
 
   function selectExp(val, element) {
     document.querySelectorAll('#step-3 .option-card').forEach(c => c.classList.remove('selected'));
