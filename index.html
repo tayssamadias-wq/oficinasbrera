@@ -676,34 +676,34 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function selectOficina(key, element) {
-    selectedOficina = key;
-    document.querySelectorAll('#step-2 .option-card').forEach(c => c.classList.remove('selected'));
+function selectOficina(key, element) {
+  selectedOficina = key;
+  document.querySelectorAll('#step-2 .option-card').forEach(c => c.classList.remove('selected'));
+
+  const target = element || event.currentTarget;
+  target.classList.add('selected');
+  target.querySelector('input').checked = true;
+
+  const data = oficinasData[key];
+  const detailsBox = document.getElementById('oficinaDetailsCard');
+  let includesHtml = data.inclui.map(item => `<li>${item}</li>`).join('');
+
+  detailsBox.innerHTML = `
+    <h3>${data.nome}</h3>
+    <div style="color: #c84b4b; font-size: 0.85rem; font-weight: 600; margin-top: -0.4rem; margin-bottom: 0.9rem;">${data.vagas}</div>
+    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
+    <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
+    <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
+    <div class="info-detail"><strong>Investimento:</strong> ${data.preco}</div>
     
-    const target = element || event.currentTarget;
-    target.classList.add('selected');
-    target.querySelector('input').checked = true;
+    <div class="includes-list">
+      <h4>O que está incluso:</h4>
+      <ul>${includesHtml}</ul>
+    </div>
+  `;
 
-    const data = oficinasData[key];
-    const detailsBox = document.getElementById('oficinaDetailsCard');
-    let includesHtml = data.inclui.map(item => `<li>${item}</li>`).join('');
-
-    detailsBox.innerHTML = `
-      <h3>${data.nome}</h3>
-      <div style="color: #c84b4b; font-size: 0.85rem; font-weight: 600; margin-top: -0.4rem; margin-bottom: 0.9rem;">${data.vagas}</div>
-      <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1rem;">${data.desc}</p>
-      <div class="info-detail"><strong>Dia:</strong> ${data.data} às ${data.horario}</div>
-      <div class="info-detail"><strong>Local:</strong> ${data.local}</div>
-      <div class="info-detail"><strong>Investimento:</strong> ${data.preco}</div>
-      
-      <div class="includes-list">
-        <h4>O que está incluso:</h4>
-        <ul>${includesHtml}</ul>
-      </div>
-    `;
-
-    document.getElementById('expLabel').innerText = `3. Qual seu nível de experiência em ${data.tipo}?`;
-  }
+  document.getElementById('expLabel').innerText = `3. Qual seu nível de experiência em ${data.tipo}?`;
+}
 
   function selectExp(val, element) {
     document.querySelectorAll('#step-3 .option-card').forEach(c => c.classList.remove('selected'));
