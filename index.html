@@ -529,26 +529,26 @@
         <label class="step-label">5. Como você gostaria de pagar a sua inscrição?</label>
         <div class="options-grid" id="step5Options">
           
-          <label class="option-card" onclick="selectPagamento('pix_297')">
-            <input type="radio" name="Forma de Pagamento" value="R$ 297,00 à vista (PIX)">
+          <label class="option-card" onclick="selectPagamento('pix_247')">
+            <input type="radio" name="Forma de Pagamento" value="R$ 247,00 à vista (PIX)">
             <div class="option-info-wrapper">
-              <div class="option-title">R$ 297,00 à vista no PIX</div>
+              <div class="option-title">R$ 247,00 à vista no PIX</div>
               <div style="font-size: 0.83rem; color: var(--text-muted);">Não-membros Petit Comité</div>
             </div>
           </label>
 
-          <label class="option-card" onclick="selectPagamento('cartao_297')">
-            <input type="radio" name="Forma de Pagamento" value="R$ 297,00 parcelado no Cartão">
+          <label class="option-card" onclick="selectPagamento('cartao_247')">
+            <input type="radio" name="Forma de Pagamento" value="R$ 247,00 parcelado no Cartão">
             <div class="option-info-wrapper">
-              <div class="option-title">R$ 297,00 parcelado no cartão</div>
+              <div class="option-title">R$ 247,00 parcelado no cartão</div>
               <div style="font-size: 0.83rem; color: var(--text-muted);">Com acréscimos da operadora</div>
             </div>
           </label>
 
-          <label class="option-card" onclick="selectPagamento('pix_247')">
-            <input type="radio" name="Forma de Pagamento" value="R$ 247,00 Exclusivo Membro Petit Comité">
+          <label class="option-card" onclick="selectPagamento('pix_217')">
+            <input type="radio" name="Forma de Pagamento" value="R$ 217,00 Exclusivo Membro Petit Comité">
             <div class="option-info-wrapper">
-              <div class="option-title">R$ 247,00 (Desconto Exclusivo)</div>
+              <div class="option-title">R$ 217,00 (Desconto Exclusivo)</div>
               <div style="font-size: 0.83rem; color: var(--accent-light);">Exclusivo Membros Petit Comité</div>
             </div>
           </label>
@@ -586,7 +586,7 @@
       data: '01/08',
       horario: '15:00',
       local: 'R. 3300 n° 450, Balneário Camboriú',
-      preco: 'R$ 297 (Não-membros) | R$ 247 (Membros Petit Comité)',
+      preco: 'R$ 247 (Não-membros) | R$ 217 (Membros Petit Comité)',
       desc: 'Experiência imersiva focada no "Aqui&Agora" e oficina de pintura e customização de molduras para o seu retrato em aquarela.',
       inclui: [
         'Moldura personalizada',
@@ -622,7 +622,7 @@
       data: '12/08',
       horario: '15:00',
       local: 'R. 3300 n° 450, Balneário Camboriú',
-      preco: 'R$ 297 (Não-membros) | R$ 247 (Membros Petit Comité)',
+      preco: 'R$ 247 (Não-membros) | R$ 217 (Membros Petit Comité)',
       desc: 'Oficina delicada e exclusiva de bordado manual em toalhas de lavabo.',
       inclui: [
         'Material completo para bordado',
@@ -638,7 +638,7 @@
       data: '15/08',
       horario: '15:00',
       local: 'R. 3300 n° 450, Balneário Camboriú',
-      preco: 'R$ 297 (Não-membros) | R$ 247 (Membros Petit Comité)',
+      preco: 'R$ 247 (Não-membros) | R$ 217 (Membros Petit Comité)',
       desc: 'Uma tarde exclusiva de oficina de pintura em xícaras de porcelana.',
       inclui: [
         'Xícara de porcelana',
@@ -783,26 +783,26 @@ function selectOficina(key, element) {
       `;
     } else {
       grid.innerHTML = `
-        <label class="option-card" onclick="selectPagamento('pix_297', this)">
-          <input type="radio" name="Forma de Pagamento" value="R$ 297,00 à vista (PIX)">
+        <label class="option-card" onclick="selectPagamento('pix_247', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 247,00 à vista (PIX)">
           <div class="option-info-wrapper">
-            <div class="option-title">R$ 297,00 à vista no PIX</div>
+            <div class="option-title">R$ 247,00 à vista no PIX</div>
             <div style="font-size: 0.83rem; color: var(--text-muted);">Não-membros Petit Comité</div>
           </div>
         </label>
 
-        <label class="option-card" onclick="selectPagamento('cartao_297', this)">
-          <input type="radio" name="Forma de Pagamento" value="R$ 297,00 parcelado no Cartão">
+        <label class="option-card" onclick="selectPagamento('cartao_247', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 247,00 parcelado no Cartão">
           <div class="option-info-wrapper">
-            <div class="option-title">R$ 297,00 parcelado no cartão</div>
+            <div class="option-title">R$ 247,00 parcelado no cartão</div>
             <div style="font-size: 0.83rem; color: var(--text-muted);">Com acréscimos da operadora</div>
           </div>
         </label>
 
-        <label class="option-card" onclick="selectPagamento('pix_247', this)">
-          <input type="radio" name="Forma de Pagamento" value="R$ 247,00 Exclusivo Membro Petit Comité">
+        <label class="option-card" onclick="selectPagamento('pix_217', this)">
+          <input type="radio" name="Forma de Pagamento" value="R$ 217,00 Exclusivo Membro Petit Comité">
           <div class="option-info-wrapper">
-            <div class="option-title">R$ 247,00 (Desconto Exclusivo)</div>
+            <div class="option-title">R$ 217,00 (Desconto Exclusivo)</div>
             <div style="font-size: 0.83rem; color: var(--accent-light);">Exclusivo Membros Petit Comité</div>
           </div>
         </label>
@@ -911,11 +911,11 @@ function selectOficina(key, element) {
       console.log('Erro ao enviar dados no segundo plano', e);
     }
 
-    const isPix = ['pix_297', 'pix_247', 'pix_147'].includes(selectedPagamentoMethod);
+    const isPix = ['pix_247', 'pix_217', 'pix_147'].includes(selectedPagamentoMethod);
 
     if (isPix) {
-      let valorText = 'R$ 297,00';
-      if (selectedPagamentoMethod === 'pix_247') valorText = 'R$ 247,00';
+      let valorText = 'R$ 247,00';
+      if (selectedPagamentoMethod === 'pix_217') valorText = 'R$ 217,00';
       if (selectedPagamentoMethod === 'pix_147') valorText = 'R$ 147,00';
 
       instructionsDiv.innerHTML = `
